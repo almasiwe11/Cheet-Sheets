@@ -35,8 +35,8 @@ const CodeBlock = ({ code, bg = false }: PropTypes) => {
   }
 
   return (
-    <div className={`${bg && "bg-gray-500"} flex-center w-full`}>
-      <div className="max-w-5xl min-w-[45rem] bg-[#3a404d] rounded-md overflow-hidden my-10">
+    <div className={`${bg && "bg-gray-500"} flex-center  `}>
+      <div className="max-w-4xl min-w-[40rem] bg-[#3a404d] rounded-md overflow-hidden  my-10">
         <div className="flex justify-between px-4 py-2 text-white text-xs items-center">
           <p className="text-lg">Example code</p>
 

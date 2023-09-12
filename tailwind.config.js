@@ -15,5 +15,8 @@ export default {
       "2xl": "1440px",
     },
   },
-  plugins: [],
+  plugins: [
+    require("@tailwindcss/forms"),
+    // ...
+  ],
 }
