@@ -1,0 +1,5 @@
+function Collapse() {
+  return <div>Collapse</div>
+}
+
+export default Collapse

@@ -1,10 +1,8 @@
-import SyntaxHighlighter from "react-syntax-highlighter"
-import { darcula } from "react-syntax-highlighter/dist/esm/styles/hljs"
-import { HiOutlineClipboard } from "react-icons/hi"
-import { BsCheckLg } from "react-icons/bs"
-import { useState } from "react"
-const App = () => {
-  const [copied, setCopied] = useState(false)
+import CodeBlock from "./CodeBlock"
+import { BiSolidRightArrow } from "react-icons/bi"
+import { BiSolidDownArrow } from "react-icons/bi"
+import { useState, useRef, useEffect } from "react"
+function App() {
   const codeString = `import React from "react";
 import { SyntaxHighlighter } from "react-syntax-highlighter";
 import { darcula } from "react-syntax-highlighter/dist/esm/styles/hljs";
@@ -23,71 +21,41 @@ const letsgoo = wefw
 }
 
 export default CodeSnippet;
-
 `
-  const customStyle = {
-    ...darcula,
-    hljs: {
-      ...darcula.hljs,
-      background: "#000", // Black background color
-    },
-    "hljs-attr": {
-      color: "#ea580c",
-    },
-    "hljs-keyword": {
-      color: "#2e95d3", // Red for imports
-    },
-    "hljs-variable": {
-      color: "#00a67d", // Green for variables
-    },
-    "hljs-title": {
-      color: "#f22c3d",
-    },
-    "hljs-name": {
-      color: "#df3079",
-    },
-  }
+
+  const [showContent, setShowContent] = useState(false)
 
   return (
-    <div className="bg-gray-500 flex-center w-full">
-      <div className="max-w-5xl min-w-[45rem] bg-[#3a404d] rounded-md overflow-hidden my-20">
-        <div className="flex justify-between px-4 py-2 text-white text-xs items-center">
-          <p className="text-lg">Example code</p>
-
-          {copied ? (
-            <button className="py-1 inline-flex items-center gap-1">
-              <span className="text-lg">
-                <BsCheckLg />
-              </span>
-              Copied!
-            </button>
-          ) : (
-            <button
-              className="py-1 inline-flex items-center gap-1"
-              onClick={() => {
-                navigator.clipboard.writeText(codeString)
-                setCopied(true)
-                setTimeout(() => {
-                  setCopied(false)
-                }, 3000)
-              }}
-            >
-              <span className="text-lg">
-                <HiOutlineClipboard />
-              </span>
-              Copy code
-            </button>
-          )}
-        </div>
-        <SyntaxHighlighter
-          language="tsx"
-          style={customStyle}
-          customStyle={{
-            padding: "20px",
-          }}
+    <div>
+      <div className={`wrapper mt-8 transition-max-height duration-1000 `}>
+        <div
+          className="bg-gray-400  items-center cursor-pointer rounded-lg p-2.5 px-10 flex gap-4 text-lg"
+          onClick={() => setShowContent((prev) => !prev)}
         >
-          {codeString}
-        </SyntaxHighlighter>
+          {showContent ? <BiSolidDownArrow /> : <BiSolidRightArrow />}
+          <h1> Collapsable section</h1>
+        </div>
+        <div className="overflow-hidden mt-3 ">
+          <div
+            className={`py-4 px-10 bg-gray-400 rounded-lg ${
+              showContent ? "block" : "hidden"
+            }`}
+          >
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Suscipit
+            sequi, necessitatibus distinctio provident voluptatibus ex earum
+            eligendi? Eaque tempore quam, hic, dolores voluptate illo veniam
+            illum quod tenetur quas doloribus assumenda ab deleniti modi quae
+            libero dolore sit? Molestias deserunt voluptates tempore ullam
+            molestiae distinctio aliquam minima? Eaque cupiditate voluptates,
+            magni ab ea illo odit quidem quibusdam et dolorum. Autem blanditiis
+            est harum minus rerum porro, dicta corrupti fugit, omnis optio quasi
+            ex at facilis. Cum ea assumenda corrupti provident ipsam reiciendis
+            nemo labore omnis voluptatem odit? Laudantium illo possimus deserunt
+            quam suscipit animi, inventore ea modi fugiat necessitatibus
+            reiciendis!
+            <CodeBlock code={codeString} />
+          </div>
+        </div>
       </div>
     </div>
   )
