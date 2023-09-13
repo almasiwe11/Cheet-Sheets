@@ -5,7 +5,7 @@ import Context from "./Context"
 export default function App() {
   const [page, setPage] = useState("useReducer")
   return (
-    <div className="grid grid-cols-[40rem_1fr] gap-24 pb-24">
+    <div className="grid grid-cols-[30rem_1fr]  pb-24">
       <div className="flex flex-col max-w-lg mx-auto h-screen justify-center ">
         <div className="flex justify-between  min-w-[15rem] items-center  ">
           <p className="title">useReducer</p>
@@ -29,7 +29,7 @@ export default function App() {
           />
         </div>
       </div>
-      <div className="mt-20 max-w-5xl">
+      <div className="mt-20 max-w-5xl mx-auto">
         {page === "useReducer" && <UseReducer />}
         {page === "Context" && <Context />}
       </div>
