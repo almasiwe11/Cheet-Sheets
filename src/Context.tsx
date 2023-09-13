@@ -33,7 +33,23 @@ export default function Context() {
 
   const createContext = `import { createContext } from "react";
 
-const MarkedContext = createContext();`
+const ProductsContext = createContext<ProductsContextType | null>(null);
+
+
+`
+
+  const types = `
+type ProductsContextType = {
+  cartIsOpen?: boolean
+  setCartIsOpen: React.Dispatch<React.SetStateAction<boolean>>
+  mobileMenuIsOpen: boolean
+  setMobileMenuIsOpen: React.Dispatch<React.SetStateAction<boolean>>
+  products: ProductType[]
+  categoryList: string[]
+  inCartProducts: inCartType[]
+  setInCartProducts: React.Dispatch<React.SetStateAction<inCartType[]>>
+}
+`
 
   const code4 = `function useProducts() {
   const context = useContext(ProductsContext)
@@ -59,6 +75,8 @@ export { ProductsProvider, useProducts }
 
       <Collapse title="1) Create Context">
         <CodeBlock code={createContext} />
+        Define types for the values that Provider will provide
+        <CodeBlock code={types} />
       </Collapse>
 
       <Collapse title="2) Now this is what we want">
