@@ -1,5 +1,5 @@
 import { BiSolidRightArrow } from "react-icons/bi"
-import { useState, useRef, useEffect } from "react"
+import { useState, useRef } from "react"
 import { ReactNode } from "react"
 
 type PropTypes = {
@@ -8,26 +8,18 @@ type PropTypes = {
 }
 function Collapse({ children, title }: PropTypes) {
   const [showContent, setShowContent] = useState(true)
-  const [heightStart, setHeightStart] = useState(0)
-  const [heightFull, setHeightFull] = useState(0)
   const headerRef = useRef<HTMLDivElement | null>(null)
   const bodyRef = useRef<HTMLDivElement | null>(null)
 
-  useEffect(() => {
-    setHeightStart(headerRef!.current!.offsetHeight + 5)
-    setHeightFull(
-      headerRef!.current!.offsetHeight + bodyRef!.current!.offsetHeight + 12
-    )
-  }, [])
-
-  const myStyles = {
-    maxHeight: `${showContent ? `${heightFull}px` : `${heightStart}px`}`,
+  const myStyle = {
+    maxHeight: `${
+      showContent ? `${bodyRef?.current?.offsetHeight}px` || "100%" : 0
+    }`,
   }
 
   return (
     <div
-      className={`mt-6 transition-max-height duration-500  ease-in  w-full  `}
-      style={myStyles}
+      className={`mt-6 transition-max-height duration-300  ease-in  w-full  `}
     >
       <div
         className="bg-gray-400 w-full  items-center cursor-pointer rounded-lg p-2.5 px-10 flex gap-4 text-lg"
@@ -43,13 +35,11 @@ function Collapse({ children, title }: PropTypes) {
           <BiSolidRightArrow />
         </div>
       </div>
-      <div className="overflow-hidden w-full  mt-3 ">
-        <div
-          className={`py-4 px-3 bg-gray-400 rounded-lg duration-500 ease-in ${
-            showContent ? "translate-y-0" : "-translate-y-[130%]"
-          }`}
-          ref={bodyRef}
-        >
+      <div
+        className="overflow-hidden w-full duration-300 ease-in transition-max-height mt-3 "
+        style={myStyle}
+      >
+        <div className={`py-4 px-3 bg-gray-400   rounded-lg `} ref={bodyRef}>
           {children}
         </div>
       </div>

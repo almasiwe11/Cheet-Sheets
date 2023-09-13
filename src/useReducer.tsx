@@ -20,7 +20,7 @@ function useReducer() {
   } `
 
   return (
-    <div className="max-w-5xl ">
+    <div className=" ">
       <h1 className="  title text-center">Use Reducer</h1>
 
       <Collapse title="1) Destructure">
@@ -56,7 +56,7 @@ const[state, dispatch] = useReducer(reducer, initialState)`}
         Dispatch or call an action it will be passed into the reducer function
         as <strong>action</strong>
         <CodeBlock
-          code={`dispatch({type:'victory', player:'5' 
+          code={`dispatch({type:'victory', player:'5' })
 dispatch({type:'reset})`}
         />
         Pass in an object into the dispatch function
